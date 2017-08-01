@@ -23,7 +23,7 @@ func readFile(fileName string) map[string]string {
 		inicioDaTag := strings.Index(linha, "<")
 		fimDaTag := strings.Index(linha, ">")
 		tag := linha[inicioDaTag+1 : fimDaTag]
-		// adicionar somente a tag
+		// adicionar somente a tag, com conteúdo vazio
 		tags[tag] = ""
 	}
 	return tags

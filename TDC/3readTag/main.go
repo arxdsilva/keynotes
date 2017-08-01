@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// bad, 'array'/slice de bytes com cada letra
+	// bad, slice de bytes com cada letra
 	v, _ := ioutil.ReadFile("readOrigin")
 	fmt.Println(v)
 	// f, _ := os.Open("readOrigin")
