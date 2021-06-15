@@ -1,0 +1,7 @@
+driver:
+  name: amazonec2
+  options:
+    amazonec2-access-key: myAmazonAccessKey
+    amazonec2-secret-key: myAmazonSecretKey
+    amazonec2-vpc-id: vpc-abc1234
+    amazonec2-subnet-id: subnet-abc1234

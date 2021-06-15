@@ -1,0 +1,133 @@
+# Tsuru PaaS
+
+Arthur Silva
+15 Jun 2021
+arthur.silva@pismo.io
+
+## Arthur 
+
+- Dev @squad-payments
+- contributor tsuru.io
+
+.image ./tsuru.png
+.image ./tsuru2.png
+
+
+## O que é
+- PaaS, visando reduzir tempo de entrega para producao
+- realmente 100% open source 
+	- código no github é exatamente o código usado em prod
+
+.image ./home.png
+
+
+## tsuru @ globo.com 2017~
+
+- cartola ~ +1.2M usuarios simultaneos | 200k req/s 
+- globoplay
+
+.image ./dash.png
+
+## Premissas do projeto
+- Boas práticas
+- Simplicidade
+- Extensível
+- Escalabilidade
+- Multiplataforma (Go, Java, NodeJS, Python, Ruby, ... Lisp)
+- Open source
+- No vendor lock-in
+
+## demo
+
+- app-create
+- app-deploy
+- unit-add (scale)
+- healthcheck
+
+## o que aconteceu?
+
+- tsuru app-create
+
+.image ./app-create.png
+
+## o que aconteceu?
+
+- tsuru app deploy -a staticex 
+
+.image ./app-deploy.png
+
+## o que aconteceu?
+
+- tsuru unit add 3 -a staticex 
+
+.image ./unit-add.png _ 700
+
+## errou? rollback
+
+- tsuru app deploy list -a staticex
+- tsuru app deploy rollback -a staticex v1 -y
+
+.image ./rollback.png
+
+## Arquitetura
+
+- Alta disponibilidade
+	- builtin components p/ mitigar falhas (rede/maquina/app)
+- Escalabilidade
+	- todos os servicos sao escalaveis horizontalmente
+- Segregacao
+	- apps sao separados por times, pools e nodes, impossibilitando o acesso direto entre si.
+- Seguranca
+
+## Escalabilidade
+
+- up/down rules
+
+- Node
+	- max container count
+	- max memory ratio
+
+- Apps
+	- max memory ratio
+	- CPU target
+
+## Tsuru + Kubernetes
+
+- Tsuru usa o Kubernetes como um provisioner em novo pool
+- [docs local](https://docs.tsuru.io/stable/contributing/compose.html?highlight=kubernetes#kubernetes-integration)
+
+## Proximos passos
+
+- instalacao local
+
+requer:
+- virtualbox
+- tsuru-client
+
+	`$ tsuru install-create`
+
+- instalacao cloud
+
+	`$ tsuru install-config-init`
+
+	`$ tsuru install-create -c install-config.yml -e install-compose.yml`
+
+
+## Proximos passos
+
+- install-config.yml:
+
+.code ./config.yml
+
+## Proximos passos
+
+- multi host/zones config: 
+
+.code ./multi-host.yml
+
+## Perguntas?
+
+- AMA
+
+apresentacao: https://github.com/arxdsilva/keynotes/blob/master/tsuru/present.slide
+

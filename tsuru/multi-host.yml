@@ -1,0 +1,19 @@
+components:
+  mongo: mongoDB.my-server.com:27017
+hosts:
+  core:
+    size: 3
+    driver:
+        options:
+            amazonec2-zone: ["a", "b", "c"]
+            amazonec2-instance-type: "t2.medium"
+  apps:
+    size: 3
+    dedicated: true
+    driver:
+        options:
+            amazonec2-zone: ["a", "b", "c"]
+            amazonec2-instance-type: "t2.small"
+driver:
+  name: amazonec2
+  options: ...
