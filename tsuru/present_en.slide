@@ -1,0 +1,137 @@
+# Tsuru PaaS
+
+Arthur Silva
+15 Jun 2021
+arthur.silva@90poe.io
+
+## Arthur 
+
+- Dev @platform-services
+- contributor tsuru.io
+
+.image ./tsuru.png
+.image ./tsuru2.png
+
+
+## What is
+- Open source Platform as a Service (Heroku like), 
+- truly open source 
+	- all github code is used to manage 2000+ apps at globo.com
+	- no paid features
+	- self hosted
+
+.image ./home.png
+
+
+## tsuru numbers @ globo.com 2017~ 
+
+These are two of the biggest apps that use Tsuru internally @ globo.com
+
+- Cartola ~+1.2M peak simultaneous users | 200k req/s (also uses kubernetes)
+- globoplay (10M+ active users)
+
+.image ./dash.png
+
+## Projects premisses
+- Usage of good practices
+- Simplicity
+- Extensible
+- Escalable
+- Multiplatform (Go, Java, NodeJS, Python, Ruby, ... Lisp)
+- Open source
+- No vendor lock-in
+
+## demo
+
+- app-create
+- app-deploy
+- unit-add (scale)
+- healthcheck
+
+## What happened?
+
+- tsuru app-create
+
+.image ./app-create.png
+
+## What happened?
+
+- tsuru app deploy -a staticex 
+
+.image ./app-deploy.png
+
+## What happened?
+
+- tsuru unit add 3 -a staticex 
+
+.image ./unit-add.png _ 700
+
+## mistake? rollback
+
+- tsuru app deploy list -a staticex
+- tsuru app deploy rollback -a staticex v1 -y
+
+.image ./rollback.png
+
+## Architecture
+
+- High disponibility
+	- builtin components to avoid fails (network/virtual machine/app)
+- Scalability
+	- All services are horizontally scalable
+- Seggregation
+	- apps are sepparated by teams, pools and nodes.
+- Security
+
+## Scalability
+
+- up/down rules
+
+- Node
+	- max container count
+	- max memory ratio
+
+- Apps
+	- max memory ratio
+	- CPU target
+
+## Tsuru + Kubernetes
+
+- Tsuru uses Kubernetes as a container pool provisioner
+- [local install docs](https://docs.tsuru.io/stable/contributing/compose.html?highlight=kubernetes#kubernetes-integration)
+
+## Next steps
+
+- local installation
+
+requer:
+- virtualbox
+- tsuru-client
+
+	`$ tsuru install-create`
+
+- cloud installation
+
+	`$ tsuru install-config-init`
+
+	`$ tsuru install-create -c install-config.yml -e install-compose.yml`
+
+
+## Next steps
+
+- install-config.yml:
+
+.code ./config.yml
+
+## Next steps
+
+- multi host/zones config: 
+
+.code ./multi-host.yml
+
+## Questions?
+
+- AMA
+
+slides: https://github.com/arxdsilva/keynotes/blob/master/tsuru/present_en.slide
+
