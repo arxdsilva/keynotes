@@ -1,7 +1,7 @@
 # Tsuru PaaS
 
 Arthur Silva
-15 Jun 2021
+8 Nov 2021
 arthur.silva@90poe.io
 
 ## Arthur 
@@ -33,20 +33,13 @@ These are two of the biggest apps that use Tsuru internally @ globo.com
 .image ./dash.png
 
 ## Projects premisses
-- Usage of good practices
+- Enforce the usage of good practices (12 factor)
 - Simplicity
 - Extensible
-- Escalable
+- Scalable
 - Multiplatform (Go, Java, NodeJS, Python, Ruby, ... Lisp)
 - Open source
 - No vendor lock-in
-
-## demo
-
-- app-create
-- app-deploy
-- unit-add (scale)
-- healthcheck
 
 ## What happened?
 
@@ -75,13 +68,17 @@ These are two of the biggest apps that use Tsuru internally @ globo.com
 
 ## Architecture
 
-- High disponibility
-	- builtin components to avoid fails (network/virtual machine/app)
-- Scalability
-	- All services are horizontally scalable
-- Seggregation
-	- apps are sepparated by teams, pools and nodes.
-- Security
+- API
+	- apps/users/nodes/unit management
+	- event driven
+- Database (mongodb)
+- Queue/Cache (redis)
+- Gandalf
+	- REST API to manage git repositories and users over SSH
+- Registry
+	- docker registry (storage/distribution)
+- Router (hipache/planB/k8s router)
+	- [router api](https://app.swaggerhub.com/apis/tsuru/tsuru-router_api/1.0.0)
 
 ## Scalability
 
@@ -95,43 +92,41 @@ These are two of the biggest apps that use Tsuru internally @ globo.com
 	- max memory ratio
 	- CPU target
 
-## Tsuru + Kubernetes
+## Nice features
 
-- Tsuru uses Kubernetes as a container pool provisioner
-- [local install docs](https://docs.tsuru.io/stable/contributing/compose.html?highlight=kubernetes#kubernetes-integration)
+- Node rebalance
 
-## Next steps
+Move units among nodes trying to create a more even distribution
 
-- local installation
+- Own container provisioner (or use k8s)
 
-requer:
-- virtualbox
-- tsuru-client
+- App/team/user quota
+- API event list / adm tools...
+- tsuru init
 
-	`$ tsuru install-create`
+helps you startup any application with needed files (procfile, tsuru.yaml, .tsuruignore)
 
-- cloud installation
+## Plugins
 
-	`$ tsuru install-config-init`
+- goreplay
 
-	`$ tsuru install-create -c install-config.yml -e install-compose.yml`
+Sniff the network interface and replay requests on another app.
 
+- bluegreen deployment
 
-## Next steps
+Allows route swapping between 2 apps
 
-- install-config.yml:
+- Pool Recycle
 
-.code ./config.yml
+Allows tsuru to re-create one entire pool based on IaaS templates.
 
-## Next steps
+- Env-list
 
-- multi host/zones config: 
-
-.code ./multi-host.yml
+List public env vars of your app
 
 ## Questions?
 
-- AMA
+- curiosity: tsuru has a very small internal team: 2 devops + 3 devs
 
 slides: https://github.com/arxdsilva/keynotes/blob/master/tsuru/present_en.slide
 
